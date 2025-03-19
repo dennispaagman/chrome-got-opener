@@ -1,20 +1,23 @@
+const topics = document.querySelectorAll('img[title="nieuwe reacties"]');
+
 // Create a button that looks nice
-let button = document.createElement("button")
-button.classList.add("ctaButton")
-button.style = "margin-bottom: 15px;"
-let label = document.createTextNode("Open alle ongelezen topics")
-button.appendChild(label)
+const button = document.createElement("button");
+button.classList.add("ctaButton");
+button.style = "margin-bottom: 15px;";
+button.textContent = "Open alle ongelezen topics";
+button.disabled = topics.length === 0;
 
 // Insert the button on top of the list of bookmarks
-var listing = document.getElementsByClassName("listing")[0]
-listing.parentNode.insertBefore(button, listing)
+const listing = document.querySelector(".listing");
+listing.parentNode.insertBefore(button, listing);
 
 // When clicking the button, open all unread topics in new tabs (via background worker)
-button.addEventListener("click", function(event) {
+button.addEventListener("click", (event) => {
   event.preventDefault();
 
-  document.querySelectorAll('img[title="nieuwe reacties"]').forEach(function(topic) {
-    let url = topic.parentElement.href;
+  topics.forEach((topic) => {
+    const url = topic.parentElement.href;
+
     chrome.runtime.sendMessage(url);
-  })
-})
+  });
+});
