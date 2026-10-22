@@ -1,0 +1,28 @@
+{
+  "name": "got-opener",
+  "version": "0.4.0",
+  "private": true,
+  "scripts": {
+    "lint": "web-ext lint --self-hosted",
+    "build": "web-ext build",
+    "sign": "web-ext sign"
+  },
+  "devDependencies": {
+    "web-ext": "^10.8.0"
+  },
+  "webExt": {
+    "ignoreFiles": [
+      "LICENSE",
+      "README.md",
+      "package.json",
+      "package-lock.json"
+    ],
+    "build": {
+      "overwriteDest": true,
+      "filename": "got-opener-{version}.xpi"
+    },
+    "sign": {
+      "channel": "unlisted"
+    }
+  }
+}
